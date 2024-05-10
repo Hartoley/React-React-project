@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import Admin from './Admin';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Adminlogin from './Adminlogin';
+import Admindas from './Admindas';
+import Stundentsignup from './Stundentsignup';
+import Studentlogin from './Studentlogin';
+import Header from './Header';
+import Studentsdash from './Studentsdash';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      
+        <Routes>
+          <Route path='/' element={<Admin />}/>
+          <Route path='/students/dashboard' element={<Studentsdash />} /> 
+          <Route path='/students/login' element={<Studentlogin/>} /> 
+          <Route path='/students/signup' element={<Stundentsignup />} /> 
+          <Route path='/adminlogin' element={<Adminlogin />} /> 
+          <Route path='/admindashboard/:id' exact element={<Admindas />} /> 
+        </Routes>
+    </>
   );
 }
 
