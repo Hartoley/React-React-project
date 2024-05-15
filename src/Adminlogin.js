@@ -16,7 +16,8 @@ const Adminlogin = () => {
     const [loggedin, setloggedin] = useState (null)
 
     useEffect(() => {
-    axios.get(`${endpoint}/admin/getdata`)
+    axios.get(`http://localhost:5009/admin/getdata`)
+    // axios.get(`${endpoint}/admin/getdata`)
         .then((res) => {
             // console.log("Admin data from API:", res.data);
             setloggedin(res.data)
@@ -31,13 +32,16 @@ const Adminlogin = () => {
         },
         onSubmit:(value) =>{
         const loggedinadmin = loggedin.find(exist => exist.email == value.email)
-        // console.log(loggedinadmin);
+        
             if (loggedinadmin) {
-                axios.post(`${endpoint}/admin/login`, value)
+                
+                axios.post(`http://localhost:5009/admin/login`, value)
                 .then((res) => {  
-                    let id = loggedinadmin._id
+                   
+                    let id = `${loggedinadmin._id}`
                     
-                    // console.log(loggedinadmin._id);
+                    
+                   
                     toast.success("Admin successfully logged in")
                     navigate(`/admindashboard/${id}`)
                  

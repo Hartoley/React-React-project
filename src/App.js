@@ -7,6 +7,7 @@ import Stundentsignup from './Stundentsignup';
 import Studentlogin from './Studentlogin';
 import Header from './Header';
 import Studentsdash from './Studentsdash';
+import Uploadvideo from './Uploadvideo';
 
 
 function App() {
@@ -15,11 +16,13 @@ function App() {
       
         <Routes>
           <Route path='/' element={<Admin />}/>
-          <Route path='/students/dashboard' element={<Studentsdash />} /> 
+          <Route path='/students/dashboard/:id' element={<Studentsdash />} /> 
           <Route path='/students/login' element={<Studentlogin/>} /> 
           <Route path='/students/signup' element={<Stundentsignup />} /> 
           <Route path='/adminlogin' element={<Adminlogin />} /> 
-          <Route path='/admindashboard/:id' exact element={<Admindas />} /> 
+          <Route path='/admindashboard/:id' element={<Admindas />} /> 
+          <Route path='/uploadVideo/:courseId' element={<Uploadvideo />} /> 
+         
         </Routes>
     </>
   );
