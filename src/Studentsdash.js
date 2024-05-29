@@ -39,9 +39,7 @@ const Studentsdash = () => {
       {/* <p>{realadmin[1]}</p> */}
       <Body1></Body1>
       <Bigvideobox viewed='Because you viewed “'vspan='DevOps Beginners to Advanced with Projects' extra='”' />
-      <Bigvideobox viewed='Learners are viewing' />
-      <Bigvideobox viewed='Short and sweet courses for you' />
-      <Bigvideobox viewed='Top courses in Development' />
+    
       <Footer></Footer>
     </>
   )

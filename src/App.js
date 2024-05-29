@@ -8,6 +8,8 @@ import Studentlogin from './Studentlogin';
 import Header from './Header';
 import Studentsdash from './Studentsdash';
 import Uploadvideo from './Uploadvideo';
+import Subcategory from './Subcategory';
+import Updatecourse from './Udatecourse';
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path='/adminlogin' element={<Adminlogin />} /> 
           <Route path='/admindashboard/:id' element={<Admindas />} /> 
           <Route path='/uploadVideo/:courseId' element={<Uploadvideo />} /> 
+          <Route path="/course/:courseId" element={<Subcategory/>} />
+          <Route path="/editcourse/:courseId" element={<Updatecourse/>} />
          
         </Routes>
     </>

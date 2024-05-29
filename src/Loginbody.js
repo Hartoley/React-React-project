@@ -45,7 +45,7 @@ const Loginbody = () => {
                 
                 axios.post(`http://localhost:5009/udemy/student/login`, value)
                 .then((res) => {  
-                    let id = loggedinstudents.email
+                    let id = `${loggedinstudents._id}`
                     
                     // console.log(loggedinstudents._id);
                     toast.success("students successfully logged in")
