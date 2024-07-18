@@ -8,6 +8,7 @@ import "./subcategory.css";
 import Dashheader from "./Dashheader";
 import Star from "./Star";
 import Footer from "./Footer";
+import Subcat from "./Subcat";
 
 const Subcategory = () => {
   const { courseId } = useParams();
@@ -36,8 +37,8 @@ const Subcategory = () => {
       });
   }, [courseId]);
 
-  console.log(course);
-  console.log(videos);
+  // console.log(course);
+  // console.log(videos);
   const handleStarClick = () => {
     console.log("Star clicked!");
   };
@@ -64,14 +65,17 @@ const Subcategory = () => {
     return () => window.removeEventListener("scroll",headerChange);
   },[])
 
-  console.log(learn);
+  // console.log(learn);
 
   return (
     <>
       <Dashheader />
       <div onScroll={headerChange} className="subCategory">
         <div className="category">
-          <div className="category1"></div>
+          <div className="category1">
+
+          </div>
+          <Subcat/>
           <div className="category2">
             <p className="line1">
               TOTAL: Cloud Computing / CompTIA Cloud+ (CV0-003)
@@ -128,7 +132,7 @@ const Subcategory = () => {
               <p>English [Auto], Arabic [Auto] , Italian [Auto]</p>
             </div>
           </div>
-          <div className="category3"></div>
+          
         </div>
         <div className="section1">
           <div className="subsection1">

@@ -20,11 +20,12 @@ const Admindas = () => {
   const { id } = useParams();
   const Naira = "$"
   const sub = "Video Title:"
+  
 
 
 
 
- console.log(id);
+
 
     useEffect (()=>{
       axios.get(`http://localhost:5009/admin/getdata/id/${id}`)
@@ -51,6 +52,7 @@ const Admindas = () => {
         toast.error("Failed to fetch students data");
       })
     }, [])
+
    
     const formik = useFormik({
       initialValues:{
@@ -65,20 +67,24 @@ const Admindas = () => {
         requirements :"",
         description:"",
         authors_name:"",
-        price:""
+        price:"",
+        video_preview: null,
 
       },
+      
     
-    onSubmit:(value)=>{
-      console.log(value);
-      axios.post("http://localhost:5009/courses/upload/course", value)
+    onSubmit:(values)=>{
+      const formData = new FormData();
+      // console.log(values.video_preview);
+      formData.append('video_preview', values.video_preview);
+      axios.post("http://localhost:5009/courses/upload/course", {formData, values})
       .then((res)=>{
         toast.success("course updated successful")
         let courseId = `${res.data.course._id}`
-        console.log(courseId); 
+        // console.log(courseId); 
+        console.log(formData);
 
         navigate(`/uploadVideo/${courseId}`); 
-        console.log(res.data);
       }).catch((err)=>{
         console.log(err);
         toast.error("Failed to fetch students data");
@@ -86,7 +92,18 @@ const Admindas = () => {
     }
   })
 
+  
+  const handleFileChange = (event) => {
+    try {
+      formik.setFieldValue('video_preview', event.currentTarget.files[0]);
+    } catch (error) {
+      console.error("Failed to set field value:", error);
+      
+    }
+  };
 
+ 
+  
      
 
       useEffect(()=>{
@@ -99,18 +116,16 @@ const Admindas = () => {
         })
       }, [])
 
-      console.log(video);
+      // console.log(video);
 
       const Addvideos = (courses) =>{
         let courseId = (courses._id)
-        console.log(courseId);
         navigate(`/uploadVideo/${courseId}`); 
         
     }
 
     const Editcourse = (courses) =>{
       let courseId = (courses._id)
-      console.log(courseId);
       navigate(`/editcourse/${courseId}`); 
       
   }
@@ -130,18 +145,19 @@ const Admindas = () => {
       <ToastContainer />
       <Header/>
         
-          <h3>Welcome on board admins {realadmin[1]}</h3>
+          
+
+          <div className="postVideos">
+          
+           <h3>Welcome on board admins {realadmin[1]}</h3>
 
           <h3>Students list</h3>
           {studentsdata.map((student, index) => (
             <p key={index}>{index + 1}. {student.username}</p>
           
           ))}
-
-          <div className="postVideos">
-          
-
-          <form action="" onSubmit={formik.handleSubmit}>
+           
+          <form action="" onSubmit={formik.handleSubmit} encType="multipart/form-data">
             <p>Title</p>
             <input type="text" required placeholder='title' name='title' onChange={formik.handleChange} />
             <p>Sub-Title</p>
@@ -162,12 +178,18 @@ const Admindas = () => {
             <input type="text" required placeholder='Requirement' name='requirements' onChange={formik.handleChange}/>
             <button>Add more</button>
             <p>Descriptions</p>
-            <textarea rows="100" cols="100" id='textarea'  required placeholder='Description' name='description' onChange={formik.handleChange}></textarea>
+            <textarea rows="10" cols="50" id='textarea'  required placeholder='Description' name='description' onChange={formik.handleChange}></textarea>
             <p>Author's name</p>
             <input type="text" required placeholder='Authors name' name='authors_name' onChange={formik.handleChange} />
             <p>Price</p>
             <input type="number" required  placeholder='Price' name='price' onChange={formik.handleChange}/>
-          
+            <h4>Video Preview</h4>
+                <input 
+                  type="file" 
+                  name="video_preview" 
+                  accept="video/*" 
+                  onChange={handleFileChange} 
+                />
             
             <button type="submit">Next</button>
           </form>
