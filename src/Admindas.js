@@ -73,25 +73,28 @@ const Admindas = () => {
       },
       
     
-    onSubmit:(values)=>{
-      const formData = new FormData();
-      // console.log(values.video_preview);
-      formData.append('video_preview', values.video_preview);
-      axios.post("http://localhost:5009/courses/upload/course", {formData, values})
-      .then((res)=>{
-        toast.success("course updated successful")
-        let courseId = `${res.data.course._id}`
-        // console.log(courseId); 
-        console.log(formData);
-
-        navigate(`/uploadVideo/${courseId}`); 
-      }).catch((err)=>{
-        console.log(err);
-        toast.error("Failed to fetch students data");
-      })
-    }
-  })
-
+      onSubmit:(values)=>{
+        const formData = new FormData();
+        // console.log(values.video_preview);
+        Object.keys(values).forEach(key => {
+          formData.append(key, values[key]);
+        });
+        axios.post("http://localhost:5009/courses/upload/course", formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then((res)=>{
+          toast.success("course updated successful")
+          let courseId = `${res.data.course._id}`
+          // console.log(courseId); 
+          console.log(formData);
+          navigate(`/uploadVideo/${courseId}`); 
+        }).catch((err)=>{
+          console.log(err);
+          toast.error("Failed to fetch students data");
+        })
+      }})
   
   const handleFileChange = (event) => {
     try {

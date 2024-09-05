@@ -37,7 +37,7 @@ const Videos = () => {
       <div className='Mainvideos2'>
         {video.map((courses, index) => (
           <div key={index} className="videos" onClick={(()=>showmore(courses))}>
-            <video className="vidImage" src={courses.videos[0].url} controls></video>
+            <video className="vidImage" src={courses.previewVideo} controls></video>
             <p className="title">{courses.title}</p>
             <p className="authorName">{courses.authors_name}</p>
             <p className="price">{Naira} {courses.price}</p>

@@ -10,6 +10,7 @@ import Star from "./Star";
 import Footer from "./Footer";
 import Subcat from "./Subcat";
 
+
 const Subcategory = () => {
   const { courseId } = useParams();
   const [course, setcourse] = useState([]);
@@ -26,7 +27,6 @@ const Subcategory = () => {
       .get(`http://localhost:5009/courses/course/${courseId}`)
       .then((res) => {
         setcourse(res.data);
-
         setvideos(res.data.videos);
         setlearn(res.data.learn);
       })
