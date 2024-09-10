@@ -30,7 +30,7 @@ const Studentsdash = () => {
       })
     }, [id])
     console.log(realadmin);
-
+    
    
   return (
     <>
